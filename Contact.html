@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Us | Simple Graph Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" type="image/jpg" href="images/logo9.jpg" />
+    <meta
+      name="description"
+      content="Contact the developer to report bugs, provide feedback, or suggest improvements for our website. We value your input and aim to make our website better."
+    />
+    <meta
+      name="keywords"
+      content="contact developer, report bugs, provide feedback, website improvement, user experience, web development, web design, Simple Graph Generator, Jacob Frisch"
+    />
+    <meta name="author" content="Jacob Frisch" />
+    <link rel="stylesheet" type="text/css" href="contact.css" />
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/logo9.jpg" alt="Logo" class="img-fluid" />
+          Home
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="barGraph.html">Bar Graph</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dotplot.html">Dot Plot</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="lineGraph.html">Line Graph</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Historgram.html">Historgram</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="PieChart.html">Pie Chart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="RadarChart.html">Radar Chart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="scatterPlot.html">Scatter Plot</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="StemLeaf.html">Stem & leaf</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <main class="main-content">
+        <h1>Contact the developer here:</h1>
+        <h5>
+          Please fill out this form if you have experianced any bugs or want to
+          give feedback on how I can make the site better.
+        </h5>
+        <div class="container mt-5">
+          <form
+            class="row g-3"
+            action="https://formsubmit.co/simplegraphgenerator@gmail.com"
+            method="POST"
+          >
+            <input type="text" name="_honey" style="display: none" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input
+              type="hidden"
+              name="_next"
+              value="http://127.0.0.1:5500/SimpleGraphGenerator/success.html"
+            />
+            <div class="col-md-6">
+              <label for="firstName" class="form-label">
+                Name(not required)</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="Name"
+                maxlength="1000"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="lastName" class="form-label"
+                >Company Name(not required)</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="Company&nbsp;Name"
+                id="NameCompany"
+                maxlength="1000"
+              />
+            </div>
+            <div class="col-md-12">
+              <label for="comments" class="form-label"
+                >Comments, Feedback, Bug Reports(required)</label
+              >
+              <textarea
+                class="form-control"
+                id="comments"
+                name="comments,&nbsp;questions?"
+                rows="3"
+                placeholder="Enter you message here!"
+                required
+                maxlength="1000"
+              ></textarea>
+            </div>
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer class="navbar navbar-dark bg-dark">
+        <div class="navbar-brand">Website Made By Jacob Frisch</div>
+        <div class="copyright">&copy; 2023 Your Company</div>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

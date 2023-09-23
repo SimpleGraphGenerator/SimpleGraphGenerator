@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Radar Chart Generator | Simple Graph Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" type="image/jpg" href="images/logo9.jpg" />
+    <meta
+      name="description"
+      content="Generate radar charts easily with the Simple Radar Chart Generator. Visualize your data with 7 easy steps"
+    />
+    <meta
+      name="keywords"
+      content="radar chart, radar graph, data visualization, radar chart generator"
+    />
+    <meta name="author" content="Jacob Frisch" />
+    <link rel="stylesheet" type="text/css" href="RadarChart.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo9.jpg" alt="Logo" class="img-fluid" />
+        Home
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="barGraph.html">Bar Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dotplot.html">Dot Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lineGraph.html">Line Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Historgram.html">Historgram</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="PieChart.html">Pie Chart</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Radar Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scatterPlot.html">Scatter Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StemLeaf.html">Stem & leaf</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="main-content">
+            <h1>Simple Radar Chart Generator</h1>
+
+            <div class="form-group">
+              <label class="input-label">Enter Graph Title:</label>
+              <input
+                id="graphTitleInput"
+                class="form-control"
+                type="text"
+                placeholder="Enter Title"
+                value="Radar Chart"
+              />
+            </div>
+
+            <div class="data-input">
+              <label class="input-label" id="dataNameLabel1"
+                >Data Name(1):</label
+              >
+              <input
+                class="form-control data-name"
+                type="text"
+                id="dataName1"
+              />
+              <label class="input-label" id="dataValueLabel1"
+                >Data Value(1):</label
+              >
+              <input
+                class="form-control data-value"
+                type="number"
+                id="dataValue1"
+              />
+            </div>
+
+            <div class="data-input">
+              <label class="input-label" id="dataNameLabel2"
+                >Data Name(2):</label
+              >
+              <input
+                class="form-control data-name"
+                type="text"
+                id="dataName2"
+              />
+              <label class="input-label" id="dataValueLabel2"
+                >Data Value(2):</label
+              >
+              <input
+                class="form-control data-value"
+                type="number"
+                id="dataValue2"
+              />
+            </div>
+
+            <div class="data-input">
+              <label class="input-label" id="dataNameLabel3"
+                >Data Name(3):</label
+              >
+              <input
+                class="form-control data-name"
+                type="text"
+                id="dataName3"
+              />
+              <label class="input-label" id="dataValueLabel3"
+                >Data Value(3):</label
+              >
+              <input
+                class="form-control data-value"
+                type="number"
+                id="dataValue3"
+              />
+            </div>
+
+            <button class="button" onclick="addDataInput()">
+              Add New Field
+            </button>
+
+            <div style="margin: 10px"></div>
+
+            <button class="button" onclick="generateRadarChart()">
+              Generate RadarChart
+            </button>
+            <button class="button" onclick="resetRadarChart()">
+              Reset RadarChart
+            </button>
+            <button class="button" onclick="copyToClipboard()">Copy</button>
+            <button class="button" onclick="downloadRadarChart()">
+              Download as JPEG
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div id="userGuide" class="user-guide">
+            <h4>User Guide:</h4>
+            <p>Here's how to use the RadarChart Generator:</p>
+            <ol>
+              <li>Enter a title for your radar Chart.</li>
+              <li>
+                Enter data names and values. To add more data fields, click the
+                "Add New Field" button.
+              </li>
+              <li>
+                Click the "Generate RadarChart" button to create your radar
+                chart.
+              </li>
+              <li>
+                Copy your graph to the clipboard, or download it as a JPEG.
+              </li>
+            </ol>
+            <p>
+              Remember to input an equal number of labels and data values for
+              the graph it render properly.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div id="RadarChartContainer" class="chart-container">
+            <div id="graphTitle" class="graph-title"></div>
+            <canvas id="RadarChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="navbar navbar-dark bg-dark">
+      <div class="navbar-brand">Website Made By Jacob Frisch</div>
+      <div class="copyright">&copy; 2023 Your Company</div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="RadarChart.js"></script>
+  </body>
+</html>

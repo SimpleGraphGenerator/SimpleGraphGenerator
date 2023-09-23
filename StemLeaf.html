@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Simple Stem and Leaf Generator | Simple Graph Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" type="image/jpg" href="images/logo9.jpg" />
+
+    <meta
+      name="description"
+      content="Generate stem and leaf plots with ease using the Stem and Leaf Plot Generator. Create your stem and leaf plot in 2 easy steps"
+    />
+
+    <meta
+      name="keywords"
+      content="Stem and Leaf Plot, Stem and Leaf Diagram, Data Visualization, Data Analysis Tool, Statistical Plot, Stem and Leaf Generator, Data Representation, Graphical Data Analysis, Stem and Leaf Chart, Statistical Analysis Tool, Data Plotting, Data Distribution Visualization, Online Data Plotter, STEM Plot, Leaf Plot"
+    />
+    <meta name="author" content="Jacob Frisch" />
+    <link rel="stylesheet" type="text/css" href="StemLeaf.css" />
+  </head>
+  <style></style>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo9.jpg" alt="Logo" class="img-fluid" />
+        Home
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="barGraph.html">Bar Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dotplot.html">Dot Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lineGraph.html">Line Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Historgram.html">Historgram</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="PieChart.html">Pie Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RadarChart.html">Radar Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scatterPlot.html">Scatter Plot</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Stem & leaf</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <main class="main-content">
+        <h1>Stem and Leaf Plot Generator</h1>
+        <div class="row">
+          <div class="col-lg-6">
+            <div id="singleLeafFields" class="chart-container">
+              <label class="input-label" for="dataInput"
+                >Enter data values (comma-separated):</label
+              >
+              <input
+                class="input-field"
+                type="text"
+                id="dataInput"
+                placeholder="1,10,100"
+              />
+
+              <label class="input-label" for="graphTitle">Graph Title:</label>
+              <input
+                class="input-field"
+                type="text"
+                id="graphTitle"
+                placeholder="Stem and Leaf Plot Title"
+                value="Stem Leaf Plot"
+              />
+            </div>
+
+            <div style="margin: 10px"></div>
+
+            <button class="button" onclick="generateSLplot()">
+              Generate Plot
+            </button>
+
+            <div style="margin: 10px"></div>
+
+            <button class="button" onclick="resetSLplot()">Reset</button>
+            <button class="button" onclick="copySLplot()">Copy</button>
+          </div>
+          <div class="col-lg-6">
+            <div id="userGuide" class="user-guide">
+              <h4>User Guide</h4>
+              <ol>
+                <li>Enter your data values, separated by commas.</li>
+                <li>You can provide a title for your graph.</li>
+                <li>
+                  Select the text color for your plot using the color picker.
+                </li>
+                <li>
+                  Click the "Generate Plot" button to create your stem and leaf
+                  plot.
+                </li>
+              </ol>
+              <p>
+                After generating the plot, you can use the additional buttons:
+              </p>
+              <ul>
+                <li>
+                  "Reset" to clear the input fields and the generated plot.
+                </li>
+                <li>"Copy" to copy the plot as text to the clipboard</li>
+                <li>
+                  Tip: you can generate multiple graphs and fit the grpah in the
+                  same image.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="stemLeafPlot" class="chart-container">
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="navbar navbar-dark bg-dark">
+        <div class="navbar-brand">Website Made By Jacob Frisch</div>
+        <div class="copyright">&copy; 2023 Your Company</div>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="StemLeaf.js"></script>
+  </body>
+</html>

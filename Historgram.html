@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Simple Histogram Generator | Simple Graph Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link rel="icon" type="image/jpg" href="images/logo9.jpg" />
+    <meta
+      name="description"
+      content="Generate histograms easily with this simple tool. Generate a customizable graph is 7 easy steps."
+    />
+    <meta
+      name="keywords"
+      content="histogram generator, data visualization, graph tool, data analysis, data plotting"
+    />
+    <meta name="author" content="Jacob Frisch" />
+    <link rel="stylesheet" type="text/css" href="Historgram.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo9.jpg" alt="Logo" class="img-fluid" />
+        Home
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="barGraph.html">Bar Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dotplot.html">Dot Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lineGraph.html">Line Graph</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Historgram</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="PieChart.html">Pie Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RadarChart.html">Radar Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scatterPlot.html">Scatter Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StemLeaf.html">Stem & leaf</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <main class="main-content">
+        <div class="row">
+          <div class="col-lg-6">
+            <h1>Simple Histogram Generator</h1>
+            <div class="input-label">Data Points(Comma Separated):</div>
+            <input
+              type="text"
+              id="dataInput"
+              class="input-field data-input"
+              placeholder="0,1,2,3,4,5,6,7,8,9,10"
+            />
+            <div class="input-label">Max Y-axis Value:</div>
+            <input
+              type="number"
+              id="maxYValue"
+              class="input-field"
+              placeholder="Enter Max Y-axis value"
+              oninput="validateinput(this)"
+            />
+
+            <div class="input-label">Graph Title:</div>
+            <input
+              type="text"
+              id="graphTitle"
+              class="input-field"
+              placeholder="Enter graph title"
+            />
+
+            <div class="input-label">Y-axis Label:</div>
+            <input
+              type="text"
+              id="yAxisLabel"
+              class="input-field"
+              placeholder="Enter Y-axis label"
+            />
+
+            <div class="input-label">X-axis Label:</div>
+            <input
+              type="text"
+              id="xAxisLabel"
+              class="input-field"
+              placeholder="Enter X-axis label"
+            />
+
+            <div class="input-label">X-axis Range (min, max):</div>
+            <input
+              type="text"
+              id="xAxisRange"
+              class="input-field"
+              placeholder="Enter x-axis range"
+              oninput="validateMinMaxX(this, 'validationMessageX')"
+            />
+            <div
+              id="validationMessageX"
+              class="alert alert-danger"
+              style="display: none"
+            ></div>
+
+            <div class="input-label">
+              Number of Bins(Bars) Must Be Multiple of Max X-axis value to
+              render correctly:
+            </div>
+            <input
+              type="number"
+              id="numBins"
+              class="input-field"
+              placeholder="Enter value"
+              oninput="validateinput(this)"
+            />
+
+            <button class="button" onclick="generateOrUpdateHistogram()">
+              Generate Histogram
+            </button>
+
+            <div style="margin: 10px"></div>
+
+            <button class="button" onclick="resetHistogram()">
+              Reset Histogram
+            </button>
+            <button class="button" onclick="copyToClipboard()">Copy</button>
+            <button class="button" onclick="downloadHistogram()">
+              Download as JPEG
+            </button>
+          </div>
+          <div class="col-lg-6">
+            <div id="userGuide" class="user-guide">
+              <h4>User Guide</h4>
+              <ol>
+                <li>Enter your data points. Separate values with commas.</li>
+                <li>Specify a custom maximum Y-axis value.</li>
+                <li>Enter a title for your graph.</li>
+                <li>Provide labels for the Y-axis and X-axis.</li>
+                <li>Define the range for the X-axis. (e.g., 0,10).</li>
+                <li>
+                  Enter the number of bins (bars) you want for the histogram.
+                  This does need to be a multiple of the max X-axis value to
+                  display properly.
+                </li>
+                <li>
+                  Click the "Generate Histogram" button to create your
+                  histogram.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="histogramContainer" class="chart-container">
+              <svg id="histogram"></svg>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="navbar navbar-dark bg-dark">
+        <div class="navbar-brand">Website Made By Jacob Frisch</div>
+        <div class="copyright">&copy; 2023 Your Company</div>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="Historgram.js"></script>
+  </body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Scatter Plot Generator | Simple Graph Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" type="image/jpg" href="images/logo9.jpg" />
+    <meta
+      name="description"
+      content="Generate scatter plots easily with the Simple Scatter Plot Generator. Creat your scatter plot in 6 easy steps."
+    />
+
+    <meta
+      name="keywords"
+      content="Scatter Plot Generator, Create Scatter Plots, Online Scatter Plot Tool, Data Visualization, Chart Maker, XY Plot Generator, Graph Generator, Data Analysis Tool, Data Plotting, Scatter Chart Creator, Plot Data Points, Data Visualization, Graphing Tool, Data Graphing, XY Scatter Plot, Scatter Plot Maker, Interactive Data Charts, Charting Tool, Data Visualization Tool, Charting Software"
+    />
+    <meta name="author" content="Jacob Frisch" />
+    <link rel="stylesheet" type="text/css" href="scatterPlot.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo9.jpg" alt="Logo" class="img-fluid" />
+        Home
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="barGraph.html">Bar Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dotplot.html">Dot Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lineGraph.html">Line Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Historgram.html">Historgram</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="PieChart.html">Pie Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RadarChart.html">Radar Chart</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Scatter Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StemLeaf.html">Stem & leaf</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <main class="main-content">
+        <h1>Simple Scatter Plot Generator</h1>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="input-label" for="dataInput"
+              >Enter data points (x, y):</label
+            >
+            <input
+              class="input-field"
+              type="text"
+              id="dataInput"
+              placeholder="(1, 1)(2, 3)(3, 5)"
+            />
+
+            <label class="input-label" for="xAxisRange"
+              >X-axis Range (min,max):</label
+            >
+            <input
+              class="input-field"
+              type="text"
+              id="xAxisRange"
+              placeholder="0,10"
+              oninput="validateMinMaxX(this, 'validationMessageX')"
+            />
+            <span id="validationMessageX" class="validation-message"></span>
+
+            <label class="input-label" for="yAxisRange"
+              >Y-axis Range (min,max):</label
+            >
+            <input
+              class="input-field"
+              type="text"
+              id="yAxisRange"
+              placeholder="0,10"
+              oninput="validateMinMaxY(this, 'validationMessageY')"
+            />
+            <span id="validationMessageY" class="validation-message"></span>
+
+            <label class="input-label" for="xAxisTitle">X-axis Title:</label>
+            <input
+              class="input-field"
+              type="text"
+              id="xAxisTitle"
+              value="X Axis"
+            />
+
+            <label class="input-label" for="yAxisTitle">Y-axis Title:</label>
+            <input
+              class="input-field"
+              type="text"
+              id="yAxisTitle"
+              value="Y Axis"
+            />
+
+            <label class="input-label" for="graphTitle">Graph Title:</label>
+            <input
+              class="input-field"
+              type="text"
+              id="graphTitle"
+              value="Scatter Plot"
+              oninput="updateGraphTitle(this.value)"
+            />
+
+            <label class="container">
+              <input
+                type="checkbox"
+                id="toggleLineOfBestFit"
+                onclick="toggleLineOfBestFit()"
+              />
+              <span class="checkmark"></span>
+              Show Line of Best Fit
+            </label>
+
+            <div style="margin-top: 10px"></div>
+
+            <button class="button" onclick="generateScatterPlot()">
+              Generate Scatter Plot
+            </button>
+            <button class="button" onclick="resetScatterPlot()">
+              Reset Scatter Plot
+            </button>
+            <button class="button" onclick="copyToClipboard()">Copy</button>
+            <button class="button" onclick="downloadScatterPlot()">
+              Download as JPEG
+            </button>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="user-guide">
+              <h4>User Guide</h4>
+              <ol>
+                <li>
+                  Enter Data Points. Separate each pair with parentheses and
+                  commas.
+                </li>
+                <li>
+                  Specify the minimum and maximum values for the X and Y axes.
+                  Use a comma to separate the values.
+                </li>
+                <li>
+                  You can customize the X and Y axis labels by entering text.
+                </li>
+                <li>Set a title for your scatter plot.</li>
+                <li>
+                  Check the "Show Line of Best Fit" box if you want to display a
+                  line of best fit on your scatter plot.
+                </li>
+                <li>
+                  Click the "Generate Scatter Plot" button to create your
+                  scatter plot.
+                </li>
+                <li>
+                  Use the "Copy" button to copy the scatter plot image to your
+                  clipboard, or click "Download as JPEG" to save it as a JPEG
+                  image.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="scatterPlotContainer" class="chart-container">
+              <canvas id="scatterPlot"></canvas>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="navbar navbar-dark bg-dark">
+        <div class="navbar-brand">Website Made By Jacob Frisch</div>
+        <div class="copyright">&copy; 2023 Your Company</div>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scatterPlot.js"></script>
+  </body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Bar Graph Generator | Simple Graph Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" type="image/jpg" href="images/logo9.jpg" />
+    <meta
+      name="description"
+      content="Create the perfect bar graphs with the Simple Bar Graph Generator. Generate a customized graph in 5 easy steps"
+    />
+    <meta
+      name="keywords"
+      content="Bar Graph Generator, Simple Bar Graphs, Create Graphs Online, Data Visualization Tool, Graph Generator Tool, Online Chart Maker, Data Visualization Software, Bar Chart Generator, Graph Creation Guide, Data Analysis Tool, Chart Design Tips, Web-based Graph Generator"
+    />
+    <meta name="author" content="Jacob Frisch" />
+    <link rel="stylesheet" type="text/css" href="barGraph.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo9.jpg" alt="Logo" class="img-fluid" />
+        Home
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Bar Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dotplot.html">Dot Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lineGraph.html">Line Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Historgram.html">Historgram</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="PieChart.html">Pie Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RadarChart.html">Radar Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scatterPlot.html">Scatter Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StemLeaf.html">Stem & leaf</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <main class="main-content">
+        <h1>Simple Bar Graph Generator</h1>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="data-input">
+              <label class="input-label">Max Y Axis value:</label>
+              <input
+                class="input-field"
+                type="number"
+                id="maxY"
+                placeholder="May Y Axis Value"
+              />
+            </div>
+            <div class="data-input">
+              <label class="input-label">X Axis Title:</label>
+              <input
+                class="input-field"
+                type="text"
+                id="xAxisTitle"
+                placeholder="X Axis Title"
+              />
+            </div>
+            <div class="data-input">
+              <label class="input-label">Y Axis Title:</label>
+              <input
+                class="input-field"
+                type="text"
+                id="yAxisTitle"
+                placeholder="Y Axis Title"
+              />
+            </div>
+
+            <div class="data-input">
+              <label class="input-label">Graph Title:</label>
+              <input
+                class="input-field"
+                type="text"
+                id="graphTitle"
+                placeholder="Graph Title"
+              />
+            </div>
+
+            <div class="data-input" id="dataFields">
+              <label class="input-label" id="dataNameLabel"
+                >Data Name(1):</label
+              >
+              <input class="input-field data-name" type="text" />
+              <label class="input-label" id="dataValueLabel"
+                >Data Value(1):</label
+              >
+              <input class="input-field data-value" type="number" />
+            </div>
+
+            <button class="button" onclick="addDataInput()">
+              Add New Field
+            </button>
+            <button class="button" onclick="generateBarGraph()">
+              Generate Bar Graph
+            </button>
+            <button class="button" onclick="copyToClipboard()">Copy</button>
+            <button class="button" onclick="downloadBarGraph()">
+              Download as JPEG
+            </button>
+          </div>
+
+          <div class="col-lg-6">
+            <div id="userGuide">
+              <h4>User Guide</h4>
+              <p>Welcome to the Simple Bar Graph Generator!</p>
+              <p>Follow these steps to create a bar graph:</p>
+              <ol>
+                <li>
+                  Enter the maximum Y Axis value.
+                </li>
+                <li>
+                  Provide a title for the X Axis.
+                </li>
+                <li>
+                  Provide a title for the Y Axis.
+                </li>
+                <li>
+                  Enter a title for your graph.
+                </li>
+                <li>
+                  Enter data in the "Data Name" and "Data Value" fields. Click
+                  "Add New Field" to add more data points.
+                </li>
+                <li>Click "Generate Bar Graph" to create your bar graph.</li>
+                <li>
+                  You can copy the graph as an image by clicking "Copy" or
+                  download it as a JPEG by clicking "Download as JPEG."
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div id="BarGraphContainer" class="chart-container">
+          <canvas id="BarGraph"></canvas>
+        </div>
+      </main>
+      <footer class="navbar navbar-dark bg-dark">
+        <div class="navbar-brand">Website Made By Jacob Frisch</div>
+        <div class="copyright">&copy; 2023 Your Company</div>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="barGraph.js"></script>
+  </body>
+</html>

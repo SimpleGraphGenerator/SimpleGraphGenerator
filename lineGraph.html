@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Line Graph Generator | Simple Graph Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" type="image/jpg" href="images/logo9.jpg" />
+    <meta
+      name="description"
+      content="Generate custom line graphs easily with the Simple Line Graph Generator. Create professional line charts in 6 easy steps."
+    />
+    <meta
+      name="keywords"
+      content="line graph generator, create line charts, online graph tool, chart creator, data visualization"
+    />
+    <meta name="author" content="Jacob Frisch" />
+    <link rel="stylesheet" type="text/css" href="lineGraph.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo9.jpg" alt="Logo" class="img-fluid" />
+        Home
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="barGraph.html">Bar Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dotplot.html">Dot Plot</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Line Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Historgram.html">Historgram</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="PieChart.html">Pie Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RadarChart.html">Radar Chart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="scatterPlot.html">Scatter Plot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StemLeaf.html">Stem & leaf</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <main class="main-content">
+        <h1>Simple Line Graph Generator</h1>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="data-input">
+              <label class="input-label" for="xRange"
+                >X-axis Range (min, max):</label
+              >
+              <input
+                class="input-field"
+                type="text"
+                id="xRange"
+                placeholder="0,10"
+                oninput="validateMinMaxX(this, 'validationMessageX')"
+              />
+              <div
+                id="validationMessageX"
+                class="alert alert-danger"
+                style="display: none"
+              ></div>
+            </div>
+            <div class="data-input">
+              <label class="input-label" for="yRange"
+                >Y-axis Range (min, max):</label
+              >
+              <input
+                class="input-field"
+                type="text"
+                id="yRange"
+                placeholder="0,10"
+                oninput="validateMinMaxY(this, 'validationMessageY')"
+              />
+              <div
+                id="validationMessageY"
+                class="alert alert-danger"
+                style="display: none"
+              ></div>
+            </div>
+
+            <div class="data-input">
+              <label class="input-label" for="lineGraphTitle"
+                >Line Graph Title:</label
+              >
+              <input
+                class="input-field"
+                type="text"
+                id="lineGraphTitle"
+                value="Line Graph"
+                oninput="updateLineGraphTitle(this.value)"
+              />
+            </div>
+
+            <label class="input-label" for="xAxisTitle">X-axis Title:</label>
+            <input
+              class="input-field"
+              type="text"
+              id="xAxisTitle"
+              value="X Axis"
+            />
+
+            <label class="input-label" for="yAxisTitle">Y-axis Title:</label>
+            <input
+              class="input-field"
+              type="text"
+              id="yAxisTitle"
+              value="Y Axis"
+            />
+
+            <div id="dataInputContainer">
+              <label class="input-label" for="dataInput"
+                >Enter data points (x, y):</label
+              >
+              <button class="button" onclick="addNewInputField()">
+                Add New Line
+              </button>
+            </div>
+
+            <div style="margin-top: 10px"></div>
+
+            <button class="button" onclick="generateLineGraph()">
+              Generate Line Graph
+            </button>
+            <button class="button" onclick="resetLineGraph()">
+              Reset Line Graph
+            </button>
+            <div style="margin-top: 10px"></div>
+            <button class="button" onclick="copyToClipboard()">Copy</button>
+            <button class="button" onclick="downloadLineGraph()">
+              Download as JPEG
+            </button>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="user-guide">
+              <h4>User Guide</h4>
+              <ol>
+                <li>Enter the X-axis and Y-axis ranges (min,max).</li>
+                <li>Provide a title for the line graph.</li>
+                <li>Enter titles for the X-axis and Y-axis.</li>
+                <li>
+                  Enter data points in the format (x, y). Click "Add New Line"
+                  to add more lines.
+                </li>
+                <li>Click "Generate Line Graph" to create your line graph.</li>
+                <li>
+                  Click "Copy" to copy the graph image to the clipboard or
+                  "Download as JPEG" to save it as a JPEG file.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="lineGraphContainer" class="chart-container">
+              <canvas id="lineGraph"></canvas>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="navbar navbar-dark bg-dark">
+        <div class="navbar-brand">Website Made By Jacob Frisch</div>
+        <div class="copyright">&copy; 2023 Your Company</div>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="lineGraph.js"></script>
+  </body>
+</html>
