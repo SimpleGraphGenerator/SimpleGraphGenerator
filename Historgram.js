@@ -55,6 +55,17 @@ function validateMinMaxX(input, validationMessageId) {
   }
 }
 
+function validateinputBin(input) {
+  // Remove any non-numeric characters
+  input.value = input.value.replace(/[^0-9]/g, "");
+
+  // Enforce a maximum of 4 characters
+  if (input.value.length > 4) {
+    input.value = input.value.slice(0, 4);
+  }
+}
+
+
 function validateinput(input) {
   input.value = input.value.replace(/[^0-9,.-]/);
 }

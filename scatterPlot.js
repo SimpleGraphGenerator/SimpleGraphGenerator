@@ -10,7 +10,7 @@ function validateMinMaxX(input, validationMessageId) {
 
   if (!isNaN(minXInput) && !isNaN(maxXInput) && minXInput >= maxXInput) {
     validationMessage.textContent =
-      "The min and max X values must not be equal, and min should be less than max.";
+      "The min and max X values must not be equal, and min should be less than max. The correct format is (min,max)";
     validationMessage.style.display = "block";
     input.style.borderColor = "red";
     input.style.backgroundColor = "#ffeaea";
@@ -31,7 +31,7 @@ function validateMinMaxY(input, validationMessageId) {
 
   if (!isNaN(minYInput) && !isNaN(maxYInput) && minYInput >= maxYInput) {
     validationMessage.textContent =
-      "The min and max Y values must not be equal, and min should be less than max.";
+    "The min and max X values must not be equal, and min should be less than max. The correct format is (min,max)";
     validationMessage.style.display = "block";
     input.style.borderColor = "red";
     input.style.backgroundColor = "#ffeaea";
