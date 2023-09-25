@@ -66,15 +66,10 @@ function allowNumbersCommasAndParentheses(event) {
 
 function toggleLineOfBestFit() {
   const checkbox = document.getElementById("toggleLineOfBestFit"); // Get the checkbox element
-  lineOfBestFitEnabled = !lineOfBestFitEnabled; // Toggle the status
+  lineOfBestFitEnabled = checkbox.checked; // Update the status
 
-  if (lineOfBestFitEnabled) {
-    // If checked, generate the line of best fit
-    generateScatterPlot();
-  } else {
-    // If unchecked, remove the line of best fit
-    removeLineOfBestFit();
-  }
+  // Re-generate the scatter plot based on the updated checkbox status
+  generateScatterPlot();
 }
 
 const dataInput = document.getElementById("dataInput");
@@ -93,6 +88,29 @@ function removeLineOfBestFit() {
     );
     scatterPlotChart.update();
   }
+}
+function calculateLineEquation(dataPoints) {
+  // Calculate the line of best fit (linear regression)
+  const n = dataPoints.length;
+  let sumX = 0;
+  let sumY = 0;
+  let sumXY = 0;
+  let sumX2 = 0;
+
+  for (const point of dataPoints) {
+    sumX += point.x;
+    sumY += point.y;
+    sumXY += point.x * point.y;
+    sumX2 += point.x * point.x;
+  }
+
+  const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  const intercept = (sumY - slope * sumX) / n;
+
+  // Format the equation
+  const equation = `y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}`;
+
+  return equation;
 }
 
 function generateScatterPlot() {
@@ -151,6 +169,11 @@ function generateScatterPlot() {
       }
     : null;
 
+  // Calculate the equation of the line of best fit
+  const equation = lineOfBestFitEnabled
+    ? calculateLineEquation(regressionData)
+    : "";
+
   const canvas = document.getElementById("scatterPlot");
   const ctx = canvas.getContext("2d");
 
@@ -161,7 +184,7 @@ function generateScatterPlot() {
   scatterPlotChart = new Chart(ctx, {
     type: "scatter",
     data: {
-      datasets: [dataset].filter(Boolean),
+      datasets: [dataset, regressionDataset].filter(Boolean),
     },
     options: {
       scales: {
@@ -212,16 +235,17 @@ function generateScatterPlot() {
             size: 24,
           },
         },
+        // Add a custom text for the subtitle (equation of the line of best fit)
+        subtitle: {
+          display: true,
+          text: lineOfBestFitEnabled ? `Line of Best Fit: ${equation}` : "",
+          font: {
+            size: 16,
+          },
+        },
       },
     },
   });
-  if (lineOfBestFitEnabled) {
-    scatterPlotChart.data.datasets.push(regressionDataset);
-    scatterPlotChart.data.datasets[
-      scatterPlotChart.data.datasets.length - 1
-    ].order = 1; // Set a higher order
-    scatterPlotChart.update();
-  }
 }
 
 // Function to calculate the line of best fit
