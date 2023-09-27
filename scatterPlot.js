@@ -2,10 +2,11 @@ let scatterPlotChart;
 let lineOfBestFitEnabled = false;
 
 function validateMinMaxX(input, validationMessageId) {
-  input.value = input.value.replace(/[^0-9,.-]/g, "");
+  input.value = input.value.replace(/[^0-9,.\s-]/g, "");
   const [minXInput, maxXInput] = input.value
     .split(",")
-    .map((val) => val.trim());
+    .map((val) => parseFloat(val.trim()));
+
   const validationMessage = document.getElementById(validationMessageId);
 
   if (!isNaN(minXInput) && !isNaN(maxXInput) && minXInput >= maxXInput) {
@@ -23,15 +24,16 @@ function validateMinMaxX(input, validationMessageId) {
 }
 
 function validateMinMaxY(input, validationMessageId) {
-  input.value = input.value.replace(/[^0-9,.-]/g, "");
+  input.value = input.value.replace(/[^0-9,.\s-]/g, "");
   const [minYInput, maxYInput] = input.value
     .split(",")
-    .map((val) => val.trim());
+    .map((val) => parseFloat(val.trim()));
+
   const validationMessage = document.getElementById(validationMessageId);
 
   if (!isNaN(minYInput) && !isNaN(maxYInput) && minYInput >= maxYInput) {
     validationMessage.textContent =
-    "The min and max X values must not be equal, and min should be less than max. The correct format is (min,max)";
+      "The min and max Y values must not be equal, and min should be less than max. The correct format is (min,max)";
     validationMessage.style.display = "block";
     input.style.borderColor = "red";
     input.style.backgroundColor = "#ffeaea";
@@ -43,22 +45,12 @@ function validateMinMaxY(input, validationMessageId) {
   }
 }
 
-function allowNumbersAndCommas(event) {
-  const inputField = event.target;
-  const inputValue = inputField.value;
-
-  // Remove any characters that are not numbers or commas
-  const filteredValue = inputValue.replace(/[^0-9,]/g, "");
-
-  // Update the input field value with the filtered value
-  inputField.value = filteredValue;
-}
 function allowNumbersCommasAndParentheses(event) {
   const inputField = event.target;
   const inputValue = inputField.value;
 
-  // Remove any characters that are not numbers, commas, or parentheses
-  const filteredValue = inputValue.replace(/[^0-9,()]/g, "");
+  // Remove any characters that are not numbers, commas, periods (.), minus sign (-), or parentheses
+  const filteredValue = inputValue.replace(/[^0-9,().-]/g, "");
 
   // Update the input field value with the filtered value
   inputField.value = filteredValue;
@@ -157,16 +149,16 @@ function generateScatterPlot() {
   const regressionData = calculateLineOfBestFit(dataset.data);
   const regressionDataset = lineOfBestFitEnabled
     ? {
-        label: "Line of Best Fit",
-        data: regressionData,
-        type: "line",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 2,
-        fill: false,
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        order: 1, // Set a higher order for the line of best fit
-      }
+      label: "Line of Best Fit",
+      data: regressionData,
+      type: "line",
+      borderColor: "rgba(255, 99, 132, 1)",
+      borderWidth: 2,
+      fill: false,
+      pointRadius: 0,
+      pointHoverRadius: 0,
+      order: 1, // Set a higher order for the line of best fit
+    }
     : null;
 
   // Calculate the equation of the line of best fit
