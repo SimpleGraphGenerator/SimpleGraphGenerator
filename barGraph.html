@@ -99,7 +99,6 @@
                 placeholder="Y Axis Title"
               />
             </div>
-
             <div class="data-input">
               <label class="input-label">Graph Title:</label>
               <input
@@ -109,7 +108,6 @@
                 placeholder="Graph Title"
               />
             </div>
-
             <div class="data-input" id="dataFields">
               <label class="input-label" id="dataNameLabel"
                 >Data Name(1):</label
@@ -120,7 +118,22 @@
               >
               <input class="input-field data-value" type="number" />
             </div>
-
+            <div class="option-container">
+              <label class="container" for="showValues">Show Values
+                <input type="checkbox" id="showValues" class="input-field" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="option-container">
+              <label class="container" for="chooseColor">Choose color of bars
+                <input type="checkbox" id="chooseColor" class="input-field" onclick="toggleColorPicker()" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="data-input" id="colorPickerContainer" style="display: none;">
+              <label class="input-label">Select Bar Color:</label>
+              <input type="color" id="barColor" value="#000000" />
+            </div>            
             <button class="button" onclick="addDataInput()">
               Add New Field
             </button>
@@ -132,7 +145,6 @@
               Download as JPEG
             </button>
           </div>
-
           <div class="col-lg-6">
             <div id="userGuide">
               <h4>User Guide</h4>
@@ -152,17 +164,23 @@
                   Enter a title for your graph.
                 </li>
                 <li>
-                  Enter data in the "Data Name" and "Data Value" fields. Click
-                  "Add New Field" to add more data points.
+                  Enter data in the "Data Name" and "Data Value" fields. Click "Add New Field" to add more data points.
                 </li>
-                <li>Click "Generate Bar Graph" to create your bar graph.</li>
                 <li>
-                  You can copy the graph as an image by clicking "Copy" or
-                  download it as a JPEG by clicking "Download as JPEG."
+                  If you want all bars to be a single color, check the "Choose color of bars" option. A color picker will appear, allowing you to select a specific color for all bars. Uncheck it to revert to random colors for each bar.
+                </li>
+                <li>
+                  Check the "Show Values" box if you'd like each bar to display its value inside the bar.
+                </li>
+                <li>
+                  Click "Generate Bar Graph" to create your bar graph.
+                </li>
+                <li>
+                  You can copy the graph as an image by clicking "Copy" or download it as a JPEG by clicking "Download as JPEG."
                 </li>
               </ol>
             </div>
-          </div>
+          </div>          
         </div>
         <div id="BarGraphContainer" class="chart-container">
           <canvas id="BarGraph"></canvas>
@@ -177,6 +195,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="barGraph.js"></script>
   </body>
 </html>

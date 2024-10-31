@@ -39,6 +39,9 @@ function generateBarGraph() {
   const dataLabels = [];
   const dataValues = [];
   const backgroundColors = [];
+  const showValues = document.getElementById("showValues").checked;
+  const chooseColor = document.getElementById("chooseColor").checked;
+  const selectedColor = document.getElementById("barColor").value;
 
   // Loop through data input fields and collect data
   for (let i = 0; i < dataInputsCount; i++) {
@@ -49,34 +52,19 @@ function generateBarGraph() {
       dataLabels.push(nameInput.value);
       dataValues.push(Number(valueInput.value));
 
-      // Generate random RGB color for each bar
-      const randomColor = `rgb(${getRandomValue(180, 255)}, ${getRandomValue(
-        180,
-        255
-      )}, ${getRandomValue(180, 255)})`;
-      backgroundColors.push(randomColor);
+      // Use selected color if checkbox is checked; otherwise, use random colors
+      const barColor = chooseColor ? selectedColor : `rgb(${getRandomValue(180, 255)}, ${getRandomValue(180, 255)}, ${getRandomValue(180, 255)})`;
+      backgroundColors.push(barColor);
     }
   }
 
-  // Set the maximum X value to 999999
-  const maxX = 999999;
-
-  // Get other settings like min X and Y values
   const maxYInput = document.getElementById("maxY");
-  const maxY =
-    maxYInput.value !== "" ? Number(maxYInput.value) : Math.max(...dataValues); // Use the user input or the largest data value as maxY
+  const maxY = maxYInput.value !== "" ? Number(maxYInput.value) : Math.max(...dataValues);
 
-  // Get axis title inputs
   const xAxisTitle = document.getElementById("xAxisTitle").value;
   const yAxisTitle = document.getElementById("yAxisTitle").value;
-
-  // Get graph title input
   const graphTitle = document.getElementById("graphTitle").value;
 
-  // Ensure xAxisTitle is defined
-  const xAxisConfig = xAxisTitle ? { display: true, text: xAxisTitle } : {};
-
-  // Configure and create the bar graph using Chart.js
   const ctx = document.getElementById("BarGraph").getContext("2d");
   if (barGraph) {
     barGraph.destroy();
@@ -85,57 +73,53 @@ function generateBarGraph() {
     type: "bar",
     data: {
       labels: dataLabels,
-      datasets: [
-        {
-          data: dataValues,
-          backgroundColor: backgroundColors,
-          borderColor: backgroundColors,
-          borderWidth: 1,
-        },
-      ],
+      datasets: [{
+        data: dataValues,
+        backgroundColor: backgroundColors,
+        borderColor: backgroundColors,
+        borderWidth: 1,
+      }],
     },
     options: {
       plugins: {
-        legend: {
-          display: false,
-        },
+        legend: { display: false },
         title: {
           display: true,
           text: graphTitle || "Bar Graph",
-          font: {
-            size: 20,
-          },
+          font: { size: 20 },
         },
+        tooltip: { enabled: false }, // Disable tooltips on hover
       },
+      hover: { mode: null }, // Disable hover effect
       scales: {
         x: {
-          min: 0,
-          max: maxX,
-          title: {
-            display: true,
-            text: xAxisTitle || "X Axis", // Use xAxisTitle variable
-            font: {
-              size: 16,
-            },
-          },
-          ticks: {
-            font: {
-              size: 16,
-            },
-          },
+          title: { display: true, text: xAxisTitle || "X Axis", font: { size: 16 }},
+          ticks: { font: { size: 16 }},
         },
         y: {
-          min: 0,
           max: maxY,
-          title: {
-            display: true,
-            text: yAxisTitle || "Y Axis", // Use yAxisTitle variable
-          },
-          ticks: {
-            font: {
-              size: 16,
-            },
-          },
+          title: { display: true, text: yAxisTitle || "Y Axis", font: { size: 16 }},
+          ticks: { font: { size: 16 }},
+        },
+      },
+      animation: {
+        onComplete: function() {
+          if (showValues) {
+            const chartInstance = barGraph;
+            const ctx = chartInstance.ctx;
+            ctx.font = "14px Arial";
+            ctx.fillStyle = "#ffffff"; // White color to make it visible inside colored bars
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            chartInstance.data.datasets.forEach(function(dataset, i) {
+              const meta = chartInstance.getDatasetMeta(i);
+              meta.data.forEach(function(bar, index) {
+                const data = dataset.data[index];
+                ctx.fillText(data.toFixed(2), bar.x, bar.y + 15); // Adjust +15 to position within the bar
+              });
+            });
+          }
         },
       },
     },
@@ -146,6 +130,16 @@ function generateBarGraph() {
 function getRandomValue(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+function toggleColorPicker() {
+  const colorPickerContainer = document.getElementById("colorPickerContainer");
+  const chooseColor = document.getElementById("chooseColor").checked;
+
+  // Show or hide the color picker based on the checkbox state
+  colorPickerContainer.style.display = chooseColor ? "block" : "none";
+}
+
 
 function copyToClipboard() {
   const canvas = document.getElementById("BarGraph");
